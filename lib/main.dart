@@ -6,8 +6,24 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<StatefulWidget> createState() {
+    return MyAppState();
+  }
+}
+
+class MyAppState extends State<MyApp> {
+  var questionIndex = 0;
+
+  void answerQuestion() {
+    setState(() {
+      questionIndex += 1;
+    });
+    print(questionIndex);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,19 +38,24 @@ class MyApp extends StatelessWidget {
           title: const Text('My First App'),
         ),
         body: Column(
-          children: const [
-            Text('question!'),
-            ElevatedButton(
-              onPressed: null,
-              child: Text('answer 1!'),
+          children: [
+            Text(
+              questions.elementAt(questionIndex),
             ),
             ElevatedButton(
-              onPressed: null,
-              child: Text('answer 2!'),
+              onPressed: answerQuestion,
+              child: const Text('answer 1!'),
             ),
             ElevatedButton(
-              onPressed: null,
-              child: Text('answer 3!'),
+              onPressed: () => print('Answer 2 chosen!'),
+              child: const Text('answer 2!'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // ...
+                print('Answer 3 chosen!');
+              },
+              child: const Text('answer 3!'),
             ),
           ],
         ),
